@@ -1,2 +1,4 @@
 .idea/
 data/
+afinn/__pycache__/
+sentistrength/__pycache__/
