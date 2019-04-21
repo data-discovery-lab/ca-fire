@@ -10,7 +10,8 @@ text = readLines(filePath)
 
 docs <- Corpus(VectorSource(text))
 
-docs <- tm_map(docs, removeWords, c(stopwords("english"),"via","chico"))
+docs <- tm_map(docs, removeWords, c(stopwords("english"),"via","chico", "like", "socalfiresjameswoods", 
+                                    "one", "day", "butte", "see", "still", "area", "get"))
 
 
 dtm <- TermDocumentMatrix(docs)
@@ -19,6 +20,10 @@ v <- sort(rowSums(m),decreasing=TRUE)
 d <- data.frame(word = names(v),freq=v)
 
 set.seed(1234)
-barplot(d[1:10,]$freq, las = 2, names.arg = d[1:10,]$word,
+
+num_words = 20
+head(d, num_words)
+
+barplot(d[1:num_words,]$freq, las = 2, names.arg = d[1:num_words,]$word,
         col ="lightblue", main ="Most frequent words",
         ylab = "Word frequencies")
