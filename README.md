@@ -15,3 +15,7 @@ https://github.com/fnielsen/afinn
 https://github.com/cjhutto/vaderSentiment
 
 http://sentistrength.wlv.ac.uk/
+
+https://libraries.io/github/Periwynkle/genesys-nlp-workshop
+
+http://sentistrength.wlv.ac.uk/jkpop
