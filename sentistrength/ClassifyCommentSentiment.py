@@ -25,7 +25,7 @@ if not os.path.isdir(SentiStrengthUnzippedTextFilesLocation):
 # Just to test if SentiStrength it working
 def RateSentiment(sentiString):
     #open a subprocess using shlex to get the command line string into the correct args list format
-    p = subprocess.Popen(shlex.split("java -jar '" + SentiStrengthLocation + "' stdin sentidata '" + SentiStrengthUnzippedTextFilesLocation + "'"),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    p = subprocess.Popen(shlex.split("java -jar '" + SentiStrengthLocation + "' stdin sentidata '" + SentiStrengthUnzippedTextFilesLocation + "'"), stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     #communicate via stdin the string to be rated. Note that all spaces are replaced with +
     #Can't send string in Python 3, must send bytes
     b = bytes(sentiString.replace(" ","+"), 'utf-8')
@@ -39,10 +39,10 @@ def RateSentiment(sentiString):
 print("If SentiStrength is working then 3 and -1 will be next:", RateSentiment("A lovely day!"),"\n")
 
 print("Running SentiStrength on file " + FileToClassify + " with command:")
-cmd = 'java -jar "' + SentiStrengthLocation + '" sentidata "' + SentiStrengthUnzippedTextFilesLocation + '" input "' + FileToClassify + '"'
+cmd = 'java -jar "' + SentiStrengthLocation + '" sentidata "' + SentiStrengthUnzippedTextFilesLocation + '" input "' + FileToClassify + '" scale'
 print(cmd, "\n")
 p = subprocess.Popen(shlex.split(cmd),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-wait =input("Finished! The results will be in a file with a name from\n" + FileToClassify + "\nending in out.txt.\nPress enter to continue.")
+print("Finished! The results will be in a file with a name from\n" + FileToClassify + "\nending in out.txt.\nPress enter to continue.")
 
 # Uncomment the following to classify a file where the sentiment is in a column.
 #print("Running SentiStrength on column in file " + FileToClassify)
