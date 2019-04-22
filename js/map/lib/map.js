@@ -4,14 +4,14 @@ var map = L.map('map', {
   scrollWheelZoom: false,
   dragging: false,
   attributionControl: false
-}).setView([29.76, -95.37], 10.5); //Input the center location [lat, lon], 10.5 is the zoom level
+}).setView([33.784916499999994,-116.9794525], 5.8); //Input the center location [lat, lon], 10.5 is the zoom level
 
 //merge the two data sets
 //dist_num is the region_number, counts means the need level in this region_number
 //if you add counts in geojson file, you don't need to do this
-for (i = 0; i < districts.features.length; i++) {
+for (let i = 0; i < districts.features.length; i++) {
   for (j = 0; j < region_concern.features.length; j++) {
-    if (districts.features[i].properties.dist_num == region_concern.features[j].region) {
+    if (districts.features[i].properties.cartodb_id == region_concern.features[j].region) {
       districts.features[i].properties.count = region_concern.features[j].count;
     }
   }
@@ -70,13 +70,13 @@ function highlightFeature(e) {
   style_override = {
     weight: 0,
     fillOpacity: 0.8
-  }
+  };
   geojson.resetStyle(e.target);
 
   if (!L.Browser.ie && !L.Browser.opera) {
     layer.bringToFront();
   }
-  concerns = (layer.feature.properties.concern.toString().split(','));
+  // concerns = (layer.feature.properties.concern.toString().split(','));
 }
 
 //reset highlight when hovering out
@@ -101,7 +101,7 @@ var geojson = L.geoJson(districts, {
 //create an legend
 var legend = L.control({
   position: 'topleft'
-})
+});
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
     grades = ['100', '80', '60', '40', '20', '0'],
