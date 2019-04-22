@@ -69,33 +69,37 @@ def create_days():
 
 multipolygon = read_polygon_json()
 
+
+polygon_name = get_polygon_name_for_gps(29.9689, -95.6969, multipolygon=multipolygon)
+print("polygon name:", polygon_name)
+
 # days = create_days()
-days = ['2018_11_07']
-
-for filename in days:
-    with open('data/polygon_sentiment/polygon_sens_' + filename + '.csv', 'w') as sens_writer:
-        csv_writer = csv.writer(sens_writer, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        row = ['Tweet_id', 'Date', 'Hour', 'Minute', 'City', 'Location', 'Tweet', 'Afinn', 'Vader', 'SentiStrength', 'polygon', 'avg_sentiment']
-        csv_writer.writerow(row)
-
-        with open('data/raw_fire_sentiment/sens_' + filename + '.csv') as filePointer:
-            csv_reader = csv.reader(filePointer, delimiter=',')
-            for index, row in enumerate(csv_reader):
-                if index < 1:
-                    continue
-
-                afinn = float(row[7])
-                vader = float(row[8])
-                senti = float(row[9])
-
-                gps = row[5]
-                gps = gps.split(',')
-
-                lat = float(gps[0].strip())
-                lon = float(gps[1].strip())
-                polygon = get_polygon_name_for_gps(lat, lon, multipolygon=multipolygon)
-
-                avg_sentiment = (afinn + 5*vader + 5*senti / 4) / 3
-                row_data = row + [avg_sentiment, polygon]
-
-                csv_writer.writerow(row)
+# days = ['2018_11_07']
+#
+# for filename in days:
+#     with open('data/polygon_sentiment/polygon_sens_' + filename + '.csv', 'w') as sens_writer:
+#         csv_writer = csv.writer(sens_writer, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+#         row = ['Tweet_id', 'Date', 'Hour', 'Minute', 'City', 'Location', 'Tweet', 'Afinn', 'Vader', 'SentiStrength', 'polygon', 'avg_sentiment']
+#         csv_writer.writerow(row)
+#
+#         with open('data/raw_fire_sentiment/sens_' + filename + '.csv') as filePointer:
+#             csv_reader = csv.reader(filePointer, delimiter=',')
+#             for index, row in enumerate(csv_reader):
+#                 if index < 1:
+#                     continue
+#
+#                 afinn = float(row[7])
+#                 vader = float(row[8])
+#                 senti = float(row[9])
+#
+#                 gps = row[5]
+#                 gps = gps.split(',')
+#
+#                 lat = float(gps[0].strip())
+#                 lon = float(gps[1].strip())
+#                 polygon = get_polygon_name_for_gps(lat, lon, multipolygon=multipolygon)
+#
+#                 avg_sentiment = (afinn + 5*vader + 5*senti / 4) / 3
+#                 row_data = row + [avg_sentiment, polygon]
+#
+#                 csv_writer.writerow(row)
