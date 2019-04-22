@@ -32,11 +32,16 @@ function merge_styles(base, new_styles) {
 
 //set color palatte
 function getColor(d) {
-  return d > 80 ? '#67000d' :
+  return d > 90 ? '#67000d' :
+    d > 80 ? '#800000' :
+    d > 70 ? '#B31B1B' :
     d > 60 ? '#cb181d' :
-    d > 40 ? '#ef3b2c' :
-    d > 20 ? '#fb6a4a' :
-    d > 0 ? '#fc9272' : '#ffffff'
+    d > 50 ? '#FF5700' :
+    d > 40 ? '#FF7B00' :
+    d > 30 ? '#FF8C00' :
+    d > 20 ? '#FFC100' :
+    d > 10 ? '#FFE400' :
+    d > 0 ? '#F7FF00' : '#ffffff'
 };
 
 //attach color palatte to category
@@ -104,7 +109,7 @@ var legend = L.control({
 });
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
-    grades = ['100', '80', '60', '40', '20', '0'],
+    grades = ['100', '90', '80','70', '60', '50', '40', '30', '20', '10', '0'],
     labels = [];
 
   // loop through categories and generate a label with a colored square for each interval
