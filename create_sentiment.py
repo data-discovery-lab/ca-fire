@@ -29,13 +29,15 @@ if not os.path.isdir(SentiStrengthUnzippedTextFilesLocation):
 
 
 
-day = '2018_11_07'
 folder = 'data/raw_fire'
 def create_days():
     d = '2018_11_'
     result = []
-    for i in range(8, 31):
-        my_day = d + str(i)
+    for i in range(7, 31):
+        md = str(i)
+        if i < 10:
+            md = '0' + str(i)
+        my_day = d + md
         result.append(my_day)
 
     return result
@@ -67,10 +69,10 @@ analyzer = SentimentIntensityAnalyzer()
 ## AFINN sentiment
 afinn = Afinn(emoticons=True)
 
-days = [day]
-# days = create_days()
-for d in days:
-    with open('data/raw_fire_sentiment/sens_' + d + '.csv', 'w') as sens_writer:
+# days = [day]
+days = create_days()
+for day in days:
+    with open('data/raw_fire_sentiment/sens_' + day + '.csv', 'w') as sens_writer:
         csv_writer = csv.writer(sens_writer, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         row = ['Tweet_id', 'Date', 'Hour', 'Minute', 'City', 'Location', 'Tweet', 'Afinn', 'Vader', 'SentiStrength']
         csv_writer.writerow(row)
